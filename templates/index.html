@@ -9,9 +9,7 @@
 <body>
 <header>
   <h1>OS <span>Services</span> Dashboard</h1>
-  <p>Live demonstration of the services an Operating System provides &middot; Operating System micro project</p>
-</header>
-<main>
+  <p>Explore the core services provided by an Operating System</p>
   <div class="toolbar">
     <small>Click <b>Run</b> on any card. Each demo executes real OS calls on the server.</small>
     <div><button class="ghost" onclick="clearAll()">Clear</button> <button onclick="runAll()">Run all services</button></div>
@@ -29,7 +27,6 @@
   {% endfor %}
   </div>
 </main>
-<footer>G. Vikas Kumar &middot; B.Tech CSE (AI/ML) &middot; Sandip University, Nashik &middot; Ref: Silberschatz, <i>Operating System Concepts</i></footer>
 <script>
 function show(r){
   const out=document.getElementById('out-'+r.id), b=document.getElementById('badge-'+r.id);

@@ -1,0 +1,28 @@
+:root{--bg:#0a1128;--panel:#111c3d;--panel2:#16254f;--line:#24366b;--text:#e6ecff;--muted:#8fa3d6;--accent:#3da5ff;--ok:#38d9a9;--bad:#ff6b6b}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"Segoe UI",Inter,system-ui,sans-serif;line-height:1.5}
+header{padding:36px 20px 20px;text-align:center;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#0f1a3d,var(--bg))}
+header h1{margin:0 0 6px;font-size:2rem}
+header h1 span{color:var(--accent)}
+header p{margin:0;color:var(--muted)}
+main{max-width:1100px;margin:0 auto;padding:24px 16px 60px}
+.toolbar{display:flex;gap:10px;justify-content:space-between;align-items:center;flex-wrap:wrap;margin-bottom:18px}
+.toolbar small{color:var(--muted)}
+button{cursor:pointer;border:0;border-radius:8px;padding:9px 16px;font-weight:600;font-size:.9rem;background:var(--accent);color:#06142e;transition:.15s}
+button:hover{filter:brightness(1.12);transform:translateY(-1px)}
+button.ghost{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(480px,1fr));gap:16px}
+@media(max-width:560px){.grid{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.card-head{display:flex;gap:12px;align-items:center;padding:14px 16px}
+.icon{width:42px;height:42px;display:grid;place-items:center;font-size:1.3rem;background:var(--panel2);border-radius:10px;flex:none}
+.card-head h2{margin:0;font-size:1.05rem}
+.card-head p{margin:0;font-size:.85rem;color:var(--muted)}
+.card-head .txt{flex:1}
+pre{margin:0;padding:14px 16px;background:#060c20;color:#b8f2d6;font:12.5px/1.5 Consolas,"Courier New",monospace;white-space:pre-wrap;word-break:break-word;max-height:300px;overflow:auto;border-top:1px solid var(--line)}
+pre.empty{color:var(--muted);font-style:italic}
+pre.err{color:var(--bad)}
+.badge{font-size:.72rem;padding:2px 8px;border-radius:99px;margin-left:8px;vertical-align:middle}
+.badge.ok{background:rgba(56,217,169,.15);color:var(--ok)}
+.badge.bad{background:rgba(255,107,107,.15);color:var(--bad)}
+footer{text-align:center;color:var(--muted);font-size:.8rem;padding:20px}

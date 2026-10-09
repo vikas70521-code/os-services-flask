@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OS Services Dashboard</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header>
+  <h1>OS <span>Services</span> Dashboard</h1>
+  <p>Live demonstration of the services an Operating System provides &middot; Operating System micro project</p>
+</header>
+<main>
+  <div class="toolbar">
+    <small>Click <b>Run</b> on any card. Each demo executes real OS calls on the server.</small>
+    <div><button class="ghost" onclick="clearAll()">Clear</button> <button onclick="runAll()">Run all services</button></div>
+  </div>
+  <div class="grid">
+  {% for s in services %}
+    <section class="card" id="card-{{ s.id }}">
+      <div class="card-head">
+        <div class="icon">{{ s.icon }}</div>
+        <div class="txt"><h2>{{ loop.index }}. {{ s.title }}<span class="badge" id="badge-{{ s.id }}" hidden></span></h2><p>{{ s.desc }}</p></div>
+        <button onclick="runOne('{{ s.id }}')">Run</button>
+      </div>
+      <pre id="out-{{ s.id }}" class="empty">Output will appear here...</pre>
+    </section>
+  {% endfor %}
+  </div>
+</main>
+<footer>G. Vikas Kumar &middot; B.Tech CSE (AI/ML) &middot; Sandip University, Nashik &middot; Ref: Silberschatz, <i>Operating System Concepts</i></footer>
+<script>
+function show(r){
+  const out=document.getElementById('out-'+r.id), b=document.getElementById('badge-'+r.id);
+  out.className=r.ok?'':'err'; out.textContent=r.output;
+  b.hidden=false; b.className='badge '+(r.ok?'ok':'bad'); b.textContent=r.ok?'success':'error';
+}
+async function runOne(id){
+  const out=document.getElementById('out-'+id);
+  out.className='empty'; out.textContent='Running...';
+  try{ show(await (await fetch('/api/run/'+id)).json()); }
+  catch(e){ out.className='err'; out.textContent='Request failed: '+e; }
+}
+async function runAll(){
+  document.querySelectorAll('pre').forEach(p=>{p.className='empty';p.textContent='Running...'});
+  try{ (await (await fetch('/api/run-all')).json()).forEach(show); }
+  catch(e){ alert('Request failed: '+e); }
+}
+function clearAll(){
+  document.querySelectorAll('pre').forEach(p=>{p.className='empty';p.textContent='Output will appear here...'});
+  document.querySelectorAll('.badge').forEach(b=>b.hidden=true);
+}
+</script>
+</body>
+</html>
